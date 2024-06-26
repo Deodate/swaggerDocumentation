@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: API documentation example
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Returns a greeting
+      responses:
+        '200':
+          description: greeting response
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Hello World!
+  /users:
+    get:
+      summary: Retrieve all users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: John Doe
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+  /users/{userId}:
+    parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: integer
+        description: ID of the user to retrieve or update
+    get:
+      summary: Retrieve a user by ID
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+        '404':
+          description: User not found
+    put:
+      summary: Update a user by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Jane Doe
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+        '404':
+          description: User not found
+    delete:
+      summary: Delete a user by ID
+      responses:
+        '204':
+          description: Successfully deleted
+        '404':
+          description: User not found
