@@ -23,7 +23,7 @@ let users = [
   { id: 2, name: 'Mugenzi' },
 ];
 
-// CRUD operations for users
+// CRUD operations
 // Get all users
 app.get('/users', (req, res) => {
   res.json(users);
